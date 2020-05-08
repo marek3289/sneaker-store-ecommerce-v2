@@ -80,7 +80,7 @@ const ProductLayout =  ({ data }) => {
     const formattedPrice = formatCurrencyString({
       value: price,
       currency,
-      language: navigator.language
+      language: 'en'
     });
 
     return(

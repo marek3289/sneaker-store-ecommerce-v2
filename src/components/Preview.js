@@ -35,7 +35,7 @@ const Preview = ({ sku }) => {
     const price = formatCurrencyString({
         value,
         currency,
-        language: navigator.language,
+        language: 'en',
     });
 
     return(
