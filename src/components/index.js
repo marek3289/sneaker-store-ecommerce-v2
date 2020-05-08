@@ -1,5 +1,5 @@
-export { default as SEO } from './SEO';
-export { default as Header } from './Header';
+export { default as SEO } from './seo';
+export { default as Header } from './header';
 export { default as Footer } from './Footer';
 export { default as Skus } from './Skus';
 export { default as Preview } from './Preview';
