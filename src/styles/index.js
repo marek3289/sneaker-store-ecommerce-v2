@@ -1,5 +1,5 @@
 export { default as Paragraph } from './Paragraph';
-export { default as AddItemButton } from './AddItemButton';
+export { default as AddItemButton } from './addItemButton';
 export { default as Button } from './Button';
 export { default as GlobalStyle } from './globalStyle';
 export { default as theme } from './theme';
