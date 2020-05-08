@@ -1,42 +1,37 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Link } from 'gatsby';
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+import { mixins } from '@styles';
+import { Cart, CartButton } from '@components';
+const config = require('@config');
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
+const StyledWrapper = styled.header`
+    ${mixins.flexBetween};
+    ${mixins.sidePadding};
+    ${mixins.transition};
+    height: 75px;
+    border: 1px solid ${({ theme }) => theme.gray200 };
+    background-color: ${({ theme }) => theme.white};
+    z-index: 10;
+`;
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
+const Logo = styled(Link)`
+    font-size: ${({ theme }) => theme.fontSize.xl };
+    font-weight: ${({ theme }) => theme.bold };
+`;
 
-export default Header
+const Header = () => {
+    const [isOpen, setOpen] = useState(false);
+    
+    return(
+        <StyledWrapper>
+            <Logo to={config.routes.home}>Sneaker Store</Logo>
+            <CartButton isOpen={isOpen} setOpen={setOpen} />
+            <Cart isOpen={isOpen} setOpen={setOpen} />
+        </StyledWrapper>
+    )
+};
+
+export default Header;
+

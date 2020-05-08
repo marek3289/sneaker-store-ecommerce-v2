@@ -1,51 +1,40 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
+import React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { loadStripe } from '@stripe/stripe-js';
+import { CartProvider } from 'use-shopping-cart'
 
-import Header from "./header"
-import "./layout.css"
+import { GlobalStyle, theme, mixins } from '@styles';
+import { Header } from '@components';
+const config = require('@config');
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
+const StyledContent = styled.div`
+    ${mixins.flexColumn};
+    min-height: 100vh;
+`;
+
+const MainLayout = ({ children, location }) => {
+    const cartProps = {
+        stripe: loadStripe('pk_test_xtKiUnBl1NpBMuVpmZ6AlxD100sbAyw1yA'),
+        successUrl: `${location.origin}${config.routes.success}`,
+        cancelUrl: `${location.origin}`,
+        currency: "USD",
+        allowedCountries: ['US', 'GB', 'CA'],
+        billingAddressCollection: true
     }
-  `)
 
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
-  )
-}
+    return (
+        <CartProvider {...cartProps}>
+            <GlobalStyle />
+            <ThemeProvider theme={theme}>
+                <StyledContent>
+                    <Header />
+                    {children}    
+                </StyledContent>   
+            </ThemeProvider>
+        </CartProvider>
+    )
+};
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
-export default Layout
+export default MainLayout;
