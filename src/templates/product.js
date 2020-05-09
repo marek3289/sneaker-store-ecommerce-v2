@@ -15,7 +15,6 @@ const StyledWrapper = styled.div`
     position: relative;
 
     ${media.phablet`
-      height: height: calc(100vh - 100px);
       background-color: ${({ theme }) => theme.gray100 };
     `};
 
@@ -41,6 +40,7 @@ const StyledGridWrapper = styled.div`
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 90% 30px;
     ${mixins.fullHeight};
+    ${media.phablet`height: calc(100vh - 100px);`};
 `;
 
 const StyledImage = styled.img`
