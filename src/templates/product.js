@@ -10,9 +10,9 @@ const slugify = require('slugify');
 const StyledWrapper = styled.div`
     ${mixins.sidePadding};
     ${mixins.fullHeight};
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    position: relative;
+    ${mixins.flexBetween};
+    flex-direction: column;
+
 
     ::before {
       content: '';
@@ -29,6 +29,12 @@ const StyledWrapper = styled.div`
       ${media.thone`width: 250px;`};
       ${media.phablet`width: 100%;`};
     }
+`;
+
+const StyledGridWrapper = styled.div`
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    position: relative;
 `;
 
 const StyledImage = styled.img`
@@ -86,11 +92,13 @@ const ProductLayout =  ({ data }) => {
     return(
       <StyledWrapper>
         <SEO title={name} />
-        <ProductInfo name={name} price={formattedPrice} sku={sku} />
-        <ImageWrapper>
-          <StyledImage src={sku.image.src} srcSet={sku.image.srcSet} sizes={sku.image.sizes} />
-        </ImageWrapper>
-        <SocialLinks />
+        <StyledGridWrapper>
+          <ProductInfo name={name} price={formattedPrice} sku={sku} />
+          <ImageWrapper>
+            <StyledImage src={sku.image.src} srcSet={sku.image.srcSet} sizes={sku.image.sizes} />
+          </ImageWrapper>
+          <SocialLinks />
+        </StyledGridWrapper>
         <Footer next={next} previous={previous} handleNavigate={handleNavigate} idx={index} length={items.length} />
       </StyledWrapper>
     ) 

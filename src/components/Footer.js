@@ -5,9 +5,7 @@ import styled from 'styled-components';
 import { mixins, Button } from '@styles';
 
 const StyledWrapper = styled.div`
-  ${mixins.sidePadding};
   ${mixins.flexBetween};
-  position: absolute;
   width: 100%;
   bottom: 0;
   z-index: 8;
