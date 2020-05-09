@@ -40,7 +40,7 @@ const StyledGridWrapper = styled.div`
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 90% 30px;
     ${mixins.fullHeight};
-    ${media.phablet`height: calc(100vh - 100px);`};
+    ${media.phablet`height: calc(100vh - 125px);`};
 `;
 
 const StyledImage = styled.img`
