@@ -12,6 +12,7 @@ const StyledWrapper = styled.div`
     ${mixins.fullHeight};
     ${mixins.flexBetween};
     flex-direction: column;
+    position: relative;
 
     ${media.phablet`
       height: height: calc(100vh - 100px);
@@ -20,7 +21,7 @@ const StyledWrapper = styled.div`
 
     ::before {
       content: '';
-      position: absolute;
+      position: fixed;
       width: 450px;
       height: 100%;
       background-color: ${({ theme }) => theme.gray100 };
@@ -38,7 +39,6 @@ const StyledWrapper = styled.div`
 const StyledGridWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    position: relative;
 `;
 
 const StyledImage = styled.img`

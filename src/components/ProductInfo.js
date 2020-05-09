@@ -43,6 +43,8 @@ const StyledHeading = styled.h1`
 
     ${media.desktop`font-size: ${({ theme }) => theme.fontSize.xl3 };`};
     ${media.tablet`font-size: ${({ theme }) => theme.fontSize.xl2 };`};
+    ${media.phablet`font-size: ${({ theme }) => theme.fontSize.xl };`};
+    ${media.phone`font-size: ${({ theme }) => theme.fontSize.l };`};
 `;
 
 const StyledParagraph = styled(Paragraph)`

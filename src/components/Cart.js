@@ -75,7 +75,7 @@ const Cart = ({ isOpen, setOpen }) => {
             <StyledCartHeader>
                 <Paragraph big bold>Your cart</Paragraph>
                 <Paragraph>{cartCount} Items</Paragraph>
-                <Button border disabled={cartCount === 0} onClick={() => clearCart()}>clear cart</Button>
+                <Button border onClick={() => clearCart()}>clear cart</Button>
             </StyledCartHeader>
             <StyledGrid>
                 <StyledPreview>
@@ -88,7 +88,7 @@ const Cart = ({ isOpen, setOpen }) => {
                         <Paragraph>cart total:</Paragraph>
                         <Paragraph big bold>{totalPrice()}</Paragraph>
                     </StyledPriceWrapper>
-                    <Button border disabled={loading || cartCount === 0} onClick={handleCheckout}>checkout</Button>
+                    <Button border disabled={loading} onClick={handleCheckout}>checkout</Button>
                 </StyledCheckout>
             </StyledGrid>
         </StyledWrapper>
