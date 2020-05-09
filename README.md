@@ -19,11 +19,9 @@ Sneaker-Store-Ecommerce is an ecommerce app created with Gatsby. When you enter 
 
 Use Git to clone repository, then navigate into your new site’s directory and start it up.
 
-    ```shell
     git clone https://github.com/marek3289/sneaker-store-ecommerce
     cd sneaker-store-ecommerce
     gatsby develop
-    ```
     
 ## Available scripts
 
