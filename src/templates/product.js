@@ -13,6 +13,10 @@ const StyledWrapper = styled.div`
     ${mixins.flexBetween};
     flex-direction: column;
 
+    ${media.phablet`
+      height: height: calc(100vh - 100px);
+      background-color: ${({ theme }) => theme.gray100 };
+    `};
 
     ::before {
       content: '';
@@ -27,7 +31,7 @@ const StyledWrapper = styled.div`
       ${media.desktop`width: 400px;`};
       ${media.tablet`width: 350px;`};
       ${media.thone`width: 250px;`};
-      ${media.phablet`width: 100%;`};
+      ${media.phablet`width: 0;`};
     }
 `;
 
