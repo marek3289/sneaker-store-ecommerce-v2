@@ -2,26 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { mixins, Button } from '@styles';
+import { media, mixins, Button } from '@styles';
 
 const StyledWrapper = styled.div`
   ${mixins.flexBetween};
   width: 100%;
-  bottom: 0;
   z-index: 8;
+  grid-column: 1/13;
+  grid-row: 2;
 `;
 
 const StyledPageNumber = styled.div`
     ${mixins.flexCenter};
 
     h5 {
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
 `;
 
 const StyledPagination = styled.div`
     ${mixins.flexBetween};
     width: 200px;
+
+    ${media.phone` width: 160px;`};
 `;
 
 const Footer =  ({ next, previous, handleNavigate, idx, length }) => {

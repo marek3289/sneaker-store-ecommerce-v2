@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
 
     ::before {
       content: '';
-      position: fixed;
+      position: absolute;
       width: 450px;
       height: 100%;
       background-color: ${({ theme }) => theme.gray100 };
@@ -39,10 +39,16 @@ const StyledWrapper = styled.div`
 const StyledGridWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 90% 30px;
+    ${mixins.fullHeight};
 `;
 
 const StyledImage = styled.img`
     ${media.desktop`width: 75%;`};
+    align-self: flex-end;
+    margin-bottom: 50px;
+
+    ${media.tablet`align-self: center;`};
 `;
 
 const ImageWrapper = styled.div`
@@ -102,8 +108,8 @@ const ProductLayout =  ({ data }) => {
             <StyledImage src={sku.image.src} srcSet={sku.image.srcSet} sizes={sku.image.sizes} />
           </ImageWrapper>
           <SocialLinks />
+          <Footer next={next} previous={previous} handleNavigate={handleNavigate} idx={index} length={items.length} />
         </StyledGridWrapper>
-        <Footer next={next} previous={previous} handleNavigate={handleNavigate} idx={index} length={items.length} />
       </StyledWrapper>
     ) 
 }
