@@ -13,30 +13,30 @@ const StyledWrapper = styled.div`
     width: 100%;
 `;
 
-const ImgWrapper = styled.div`
+const StyledFigure = styled.figure`
     ${mixins.flexCenter};
     min-width: 100px;
     max-width: 100px;
     padding: 10px;
+
+    img {
+        width: 100%; 
+    }
 `;
 
-const StyledImage = styled.img`
-    width: 100%; 
-`;
-
-const StyledDesc = styled.div`
+const StyledDescription = styled.div`
     ${mixins.flexBetween};
     flex-direction: column;
     margin-right: 20px;
     width: 100%;
 `;
 
-const StyledDown = styled.div`
+const StyledFlex = styled.div`
      ${mixins.flexBetween};
      width: 100%;
 `;
 
-const StyledWWW = styled.div`
+const StyledQuantity = styled.div`
     ${mixins.flexBetween};
     width: 50px;
 `;
@@ -49,20 +49,20 @@ const CartPreview = ({ item }) => {
     return(
         <StyledWrapper>
             <Button remove onClick={() => removeCartItem(sku)} />
-            <ImgWrapper>
-                <StyledImage src={image.src} srcSet={image.srcSet} sizes={image.sizes} />
-            </ImgWrapper>
-            <StyledDesc>
+            <StyledFigure>
+                <img alt={name} src={image.src} srcSet={image.srcSet} sizes={image.sizes} />
+            </StyledFigure>
+            <StyledDescription>
                 <Paragraph bold>{name}</Paragraph>
-                <StyledDown>
+                <StyledFlex>
                     <Paragraph>{formattedValue}</Paragraph>
-                    <StyledWWW>
+                    <StyledQuantity>
                         <Button onClick={() => reduceItemByOne(sku)}>-</Button>
                         <Paragraph>{quantity}</Paragraph>
                         <Button onClick={() => addItem(item)}>+</Button>
-                    </StyledWWW>
-                </StyledDown>
-            </StyledDesc>
+                    </StyledQuantity>
+                </StyledFlex>
+            </StyledDescription>
         </StyledWrapper>
     )
 }

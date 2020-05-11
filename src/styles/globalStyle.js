@@ -34,6 +34,10 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: black;
   }
+  figure {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 export default GlobalStyle;

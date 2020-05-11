@@ -18,7 +18,7 @@ const StyledLinkWrapper = styled(Link)`
     ${media.desktop`height: 100%;`};
 `
 
-const StyledImageWrapper = styled.div`
+const StyledFigure = styled.figure`
     ${mixins.flexCenter};
     width: 100%;
     height: 100%;
@@ -40,9 +40,9 @@ const Preview = ({ sku }) => {
 
     return(
         <StyledLinkWrapper to={`/products/${slug}`}>
-            <StyledImageWrapper>
+            <StyledFigure>
                 <img alt={name} src={featuredImage.src} srcSet={featuredImage.srcSet} sizes={featuredImage.sizes} />
-            </StyledImageWrapper>
+            </StyledFigure>
             <StyledDescription>
                 <Paragraph medium bold>{name}</Paragraph>
                 <Paragraph medium>{price}</Paragraph>

@@ -40,6 +40,10 @@ const StyledWrapper = styled.div`
       @media (max-height: 500px) and (orientation: landscape) { 
         width: 300px
       };
+
+      @media (max-height: 400px) and (orientation: landscape) { 
+      width: 200px;
+    }
 `;
 
 const StyledGridWrapper = styled.div`
@@ -67,9 +71,13 @@ const StyledImage = styled.img`
       width: 400px;
       margin-bottom: 15px;
     }
+
+    @media (max-height: 400px) and (orientation: landscape) { 
+      width: 250px;
+    }
 `;
 
-const ImageWrapper = styled.div`
+const StyledFigure = styled.figure`
   ${mixins.flexCenter};
   grid-column: 1/13;
   grid-row: 1;
@@ -122,9 +130,9 @@ const ProductLayout =  ({ data }) => {
         <SEO title={name} />
         <StyledGridWrapper>
           <ProductInfo name={name} price={formattedPrice} sku={sku} />
-          <ImageWrapper>
-            <StyledImage src={sku.image.src} srcSet={sku.image.srcSet} sizes={sku.image.sizes} />
-          </ImageWrapper>
+          <StyledFigure>
+            <StyledImage alt={name} src={sku.image.src} srcSet={sku.image.srcSet} sizes={sku.image.sizes} />
+          </StyledFigure>
           <SocialLinks />
           <Footer next={next} previous={previous} handleNavigate={handleNavigate} idx={index} length={items.length} />
         </StyledGridWrapper>
