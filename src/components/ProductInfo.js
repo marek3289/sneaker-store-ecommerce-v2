@@ -27,6 +27,14 @@ const StyledWrapper = styled.div`
         margin-top: 0;
         grid-column: 1/12;
     `};
+
+    @media (max-height: 600px) and (orientation: landscape) { 
+        margin-top: 25px;
+    }
+
+    @media (max-height: 500px) and (orientation: landscape) { 
+        margin-top: 10px;
+    }
 `;
 
 const StyledFlex = styled.div`
@@ -45,6 +53,14 @@ const StyledHeading = styled.h1`
     ${media.tablet`font-size: ${({ theme }) => theme.fontSize.xl2 };`};
     ${media.phablet`font-size: ${({ theme }) => theme.fontSize.xl };`};
     ${media.phone`font-size: ${({ theme }) => theme.fontSize.l };`};
+
+    @media (max-height: 600px) and (orientation: landscape) { 
+        font-size: ${({ theme }) => theme.fontSize.xl2 };
+    }
+
+    @media (max-height: 500px) and (orientation: landscape) { 
+        font-size: ${({ theme }) => theme.fontSize.xl };
+    }
 `;
 
 const StyledParagraph = styled(Paragraph)`

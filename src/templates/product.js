@@ -32,11 +32,19 @@ const StyledWrapper = styled.div`
       ${media.tablet`width: 350px;`};
       ${media.thone`width: 250px;`};
       ${media.phablet`width: 0;`};
-    }
+
+      @media (max-height: 600px) and (orientation: landscape) { 
+        width: 400px
+      };
+
+      @media (max-height: 500px) and (orientation: landscape) { 
+        width: 300px
+      };
 `;
 
 const StyledGridWrapper = styled.div`
     display: grid;
+    width: 100%;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 90% 30px;
     ${mixins.fullHeight};
@@ -49,6 +57,16 @@ const StyledImage = styled.img`
     margin-bottom: 50px;
 
     ${media.tablet`align-self: center;`};
+
+    @media (max-height: 600px) and (orientation: landscape) { 
+      width: 500px;
+      margin-bottom: 30px;
+    }
+
+    @media (max-height: 500px) and (orientation: landscape) { 
+      width: 400px;
+      margin-bottom: 15px;
+    }
 `;
 
 const ImageWrapper = styled.div`

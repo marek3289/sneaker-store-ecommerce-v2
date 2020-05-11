@@ -12,11 +12,28 @@ const StyledWrapper = styled.div`
   margin-bottom: 100%;
   grid-column: 12/12;
   grid-row: 1;
+
+  @media (max-height: 600px) and (orientation: landscape) { 
+    font-size: ${({ theme }) => theme.fontSize.s };
+    margin-bottom: 0;
+  }
+
+  @media (max-height: 500px) and (orientation: landscape) { 
+    font-size: ${({ theme }) => theme.fontSize.xs };
+  }
 `;
 
 const StyledLink = styled.a`
   writing-mode: vertical-rl;
   margin: 25px 0;
+
+  @media (max-height: 600px) and (orientation: landscape) { 
+    margin: 15px 0;
+  }
+
+  @media (max-height: 500px) and (orientation: landscape) { 
+    margin: 5px 0;
+  }
 `;
 
 const SocialLinks =  () => (
