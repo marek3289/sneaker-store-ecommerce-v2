@@ -1,7 +1,7 @@
 <h2 align="center">Sneaker Store</h2>
 
 <p align="center">
-  <img src="https://imgbbb.com/images/2020/05/09/ecommerce.png" alt="sneaker-store" />
+  <img src="https://imgbbb.com/images/2020/05/11/Zrzut-ekranu-2020-05-11-o-13.38.56.png" alt="sneaker-store" />
 </p>
 
 <br>
