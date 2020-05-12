@@ -1,7 +1,6 @@
 export { default as SEO } from './seo';
 export { default as Header } from './header';
 export { default as Footer } from './Footer';
-export { default as Skus } from './Skus';
 export { default as Preview } from './Preview';
 export { default as CartPreview } from './CartPreview';
 export { default as Cart } from './Cart';
