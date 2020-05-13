@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
+import Link from 'gatsby-plugin-transition-link';
 
 import { mixins } from '@styles';
 import { Cart, CartButton } from '@components';

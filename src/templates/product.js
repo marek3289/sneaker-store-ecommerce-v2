@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { graphql, navigate } from 'gatsby';
+import { graphql } from 'gatsby';
 import { formatCurrencyString } from 'use-shopping-cart';
 
 import { SEO, SocialLinks, Footer, ProductInfo } from '@components'; 
@@ -13,6 +13,7 @@ const StyledWrapper = styled.div`
     ${mixins.flexBetween};
     flex-direction: column;
     position: relative;
+    overflow: hidden;
 
     ${media.phablet`
       background-color: ${({ theme }) => theme.gray100 };
@@ -43,6 +44,7 @@ const StyledWrapper = styled.div`
 
       @media (max-height: 400px) and (orientation: landscape) { 
       width: 200px;
+      }
     }
 `;
 
@@ -93,8 +95,6 @@ const ProductLayout =  ({ data }) => {
     const items = data.allStripeSku.edges.map(elm => elm.node.attributes.name);
     const index = items.indexOf(name);
 
-    const handleNavigate = (path) => navigate(`products/${path}`);
-
     useEffect(() => {
       
       if(items[index +1] === undefined) {
@@ -134,7 +134,7 @@ const ProductLayout =  ({ data }) => {
             <StyledImage alt={name} src={sku.image.src} srcSet={sku.image.srcSet} sizes={sku.image.sizes} />
           </StyledFigure>
           <SocialLinks />
-          <Footer next={next} previous={previous} handleNavigate={handleNavigate} idx={index} length={items.length} />
+          <Footer next={next} previous={previous} idx={index} length={items.length} />
         </StyledGridWrapper>
       </StyledWrapper>
     ) 

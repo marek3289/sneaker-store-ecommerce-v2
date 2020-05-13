@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from "gatsby";
 import styled from 'styled-components';
+import TransitionLink from 'gatsby-plugin-transition-link';
+import { formatCurrencyString } from 'use-shopping-cart';
 
 import { media, mixins, Paragraph } from '@styles';
-import { formatCurrencyString } from 'use-shopping-cart';
+import { productTransition } from '@utils/transitions';
 
 const slugify = require('slugify');
 
-const StyledLinkWrapper = styled(Link)`
+const StyledLinkWrapper = styled(TransitionLink)`
     background-color: ${({ theme }) => theme.gray100};
     display: grid;
     grid-template-rows: 4fr 1fr;
@@ -39,7 +40,17 @@ const Preview = ({ sku }) => {
     });
 
     return(
-        <StyledLinkWrapper to={`/products/${slug}`}>
+        <StyledLinkWrapper 
+            to={`/products/${slug}`} 
+            entry={{
+                trigger: ({ entry, node }) => productTransition(entry, node),
+                state: {
+                    isEntry: true
+                },
+                appearAfter: 0.1,
+                length: 1
+            }}
+            >
             <StyledFigure>
                 <img alt={name} src={featuredImage.src} srcSet={featuredImage.srcSet} sizes={featuredImage.sizes} />
             </StyledFigure>
@@ -49,7 +60,7 @@ const Preview = ({ sku }) => {
             </StyledDescription>
         </StyledLinkWrapper>
     )
-}
+};
 
 Preview.propTypes = {
     sku: PropTypes.shape({
