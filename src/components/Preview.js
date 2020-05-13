@@ -51,13 +51,15 @@ const Preview = ({ sku }) => {
                 length: 1
             }}
             >
-            <StyledFigure>
-                <img alt={name} src={featuredImage.src} srcSet={featuredImage.srcSet} sizes={featuredImage.sizes} />
-            </StyledFigure>
-            <StyledDescription>
-                <Paragraph medium bold>{name}</Paragraph>
-                <Paragraph medium>{price}</Paragraph>
-            </StyledDescription>
+            <div data-sal='slide-up' data-sal-delay='150' data-sal-easing='ease-out' data-sal-duration='600'>
+                <StyledFigure>
+                    <img alt={name} src={featuredImage.src} srcSet={featuredImage.srcSet} sizes={featuredImage.sizes} />
+                </StyledFigure>
+                <StyledDescription>
+                    <Paragraph medium bold>{name}</Paragraph>
+                    <Paragraph medium>{price}</Paragraph>
+                </StyledDescription>
+            </div>
         </StyledLinkWrapper>
     )
 };
