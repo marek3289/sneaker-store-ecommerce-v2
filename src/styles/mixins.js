@@ -45,6 +45,14 @@ const mixins = {
         ${media.tablet`padding: 0 60px;`};
         ${media.phablet`padding: 0 15px;`};
     `,
+
+    hiddenScrollbar: css`
+        overflow-y: scroll;
+
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+    `,
 };
 
 export default mixins;

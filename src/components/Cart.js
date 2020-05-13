@@ -22,12 +22,8 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledPreview = styled.div`
+    ${mixins.hiddenScrollbar};
     display: grid;
-    overflow-y: scroll;
-
-    ::-webkit-scrollbar {
-        width: 0px;
-    }
 `;
 
 const StyledPriceWrapper = styled.div`line-height: 0;`;

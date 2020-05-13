@@ -8,6 +8,7 @@ import { mixins } from '@styles';
 const StyledWrapper = styled.main`
     ${mixins.gridTemplate};
     ${mixins.fullHeight};
+    ${mixins.hiddenScrollbar};
 `;
 
 const IndexPage = () => {
