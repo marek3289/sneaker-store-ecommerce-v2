@@ -8,7 +8,7 @@ const Checkout = () => {
     return (
         <>
             <SEO title="Checkout" />
-            <CheckoutForm onSuccessfulCheckout={() => navigate=('/success')} />
+            <CheckoutForm onSuccessfulCheckout={() => navigate('/success')} />
         </>
     )
 };
