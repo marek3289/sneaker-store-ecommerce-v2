@@ -1,5 +1,9 @@
 import Stripe from "stripe";
-const stripe = new Stripe('sk_test_b6xLQUQk7iXnjxz5eIzq4Hbk00XvphFvQQ');
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+  })
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (req, res) => {
     try {
