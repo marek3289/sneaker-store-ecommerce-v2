@@ -8,10 +8,9 @@ const Checkout = () => {
     return (
         <>
             <SEO title="Checkout" />
-            <CheckoutForm />
+            <CheckoutForm onSuccessfulCheckout={() => navigate=('/success')} />
         </>
     )
 };
 
 export default Checkout;
- // onSuccessfulCheckout={() => navigate=('/success')} /
