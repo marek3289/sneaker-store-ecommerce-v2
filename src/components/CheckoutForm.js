@@ -32,7 +32,7 @@ const CheckoutForm = ({ onSuccessfulCheckout }) => {
 
         setProcessing(true);
 
-        const { data: clientSecret } = await axios.post('/payment_intent', {
+        const { data: clientSecret } = await axios.post('/.netlify/functions/payment_intent', {
             amount: 100
         })
 
