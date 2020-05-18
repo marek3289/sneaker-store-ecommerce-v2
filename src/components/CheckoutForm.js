@@ -12,7 +12,7 @@ const StyledForm = styled.form`
     ${mixins.flexColumn};
     ${mixins.fullSize};
     justify-content: space-evenly;
-    & > * { max-width: 400px; }
+    & > * { max-width: 400px; min-width: 300px; }
 `;
 
 const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
