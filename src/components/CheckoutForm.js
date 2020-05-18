@@ -52,10 +52,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
 
         try {
             const { data: clientSecret } = await axios.post('/.netlify/functions/payment_intent', {
-                amount
-                // body: JSON.stringify({
-                //     amount
-                // })
+                amount: price
             });
 
             const { error, paymentMethod } = await stripe.createPaymentMethod({
