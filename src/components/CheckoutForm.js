@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useStripe, useElements } from '@stripe/react-stripe-js';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
@@ -51,36 +51,37 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
         setProcessing(true);
 
         try {
-            const { data: clientSecret } = await axios.post('/.netlify/functions/payment_intent', {
-                // amount: price
-                amount: 1000
+            const response = await axios.post('/.netlify/functions/payment_intent', {
+                amount: price
             });
 
-            const { error, paymentMethod } = await stripe.createPaymentMethod({
-                type: 'card',
-                card: elements.getElement('cardNumber'),
-                billing_details: billingDetails
-            })
+            console.log(response)
 
-            if (error) {
-                setError(error.message);
-                setProcessing(false);
-                return;
-            }
+            // const { error, paymentMethod } = await stripe.createPaymentMethod({
+            //     type: 'card',
+            //     card: elements.getElement('cardNumber'),
+            //     billing_details: billingDetails
+            // })
 
-            const { id } = paymentMethod;
-            const confirmCardPayment = await stripe.confirmCardPayment(clientSecret, {
-                payment_method: id
-            })
+            // if (error) {
+            //     setError(error.message);
+            //     setProcessing(false);
+            //     return;
+            // }
 
-            if (confirmCardPayment.error) {
-                setError(error.message);
-                setProcessing(false);
-                return;
-            }
+            // const { id } = paymentMethod;
+            // const confirmCardPayment = await stripe.confirmCardPayment(clientSecret, {
+            //     payment_method: id
+            // })
 
-            onSuccessfulCheckout();
-            setProcessing(false);
+            // if (confirmCardPayment.error) {
+            //     setError(error.message);
+            //     setProcessing(false);
+            //     return;
+            // }
+
+            // onSuccessfulCheckout();
+            // setProcessing(false);
         } catch (err) {
             setError(err.message ? err.message : 'An unknown error occured');
             setProcessing(false);
@@ -90,14 +91,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
     return (
         <StyledForm onSubmit={handleSubmit(onSubmit)} onInvalid={(e) => e.preventDefault()}>
             <BillingDetails register={register} errors={errors} />
-            <CardDetails 
-                error={error} 
-                required={required} 
-                handleCardChange={handleCardChange}
-                CardNumberElement={CardNumberElement}
-                CardExpiryElement={CardExpiryElement}
-                CardCvcElement={CardCvcElement}
-            />
+            <CardDetails error={error} required={required} handleCardChange={handleCardChange} />
             <Button submit type='submit' disabled={!stripe || isProcessing}>
                 {isProcessing ? 'Processing...' : `Pay ${price} USD`}
             </Button>

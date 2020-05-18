@@ -1,7 +1,6 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (req, res, callback) => {
-    console.log(req, res, callback)
     try {
         const amount = 1000
 
@@ -12,7 +11,7 @@ exports.handler = async (req, res, callback) => {
 
         return {
             statusCode: 200,
-            body: paymentIntent.client_secret
+            body: {req, res, callback}
         }
     } catch (err) {
         return { statusCode: 500, body: err.toString() };

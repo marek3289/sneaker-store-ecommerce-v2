@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// import { CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
+import { CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 
 import { Label } from '@components';
 import { Paragraph, Input } from '@styles';
@@ -48,7 +48,7 @@ const StyledCard = styled(Input)`
     }
 `;
 
-const CardDetails = ({ error, handleCardChange, required, CardNumberElement, CardExpiryElement, CardCvcElement }) => (
+const CardDetails = ({ error, handleCardChange, required }) => (
     <>
         <Label title='Card Information' error={required} />
         <FieldWrapper>
