@@ -51,37 +51,35 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
         setProcessing(true);
 
         try {
-            const response = await axios.post('/.netlify/functions/payment_intent', {
+            const { data: clientSecret } = await axios.post('/.netlify/functions/payment_intent', {
                 amount: price
             });
 
-            console.log(response)
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
+                type: 'card',
+                card: elements.getElement('cardNumber'),
+                billing_details: billingDetails
+            })
 
-            // const { error, paymentMethod } = await stripe.createPaymentMethod({
-            //     type: 'card',
-            //     card: elements.getElement('cardNumber'),
-            //     billing_details: billingDetails
-            // })
+            if (error) {
+                setError(error.message);
+                setProcessing(false);
+                return;
+            }
 
-            // if (error) {
-            //     setError(error.message);
-            //     setProcessing(false);
-            //     return;
-            // }
+            const { id } = paymentMethod;
+            const confirmCardPayment = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: id
+            })
 
-            // const { id } = paymentMethod;
-            // const confirmCardPayment = await stripe.confirmCardPayment(clientSecret, {
-            //     payment_method: id
-            // })
+            if (confirmCardPayment.error) {
+                setError(error.message);
+                setProcessing(false);
+                return;
+            }
 
-            // if (confirmCardPayment.error) {
-            //     setError(error.message);
-            //     setProcessing(false);
-            //     return;
-            // }
-
-            // onSuccessfulCheckout();
-            // setProcessing(false);
+            onSuccessfulCheckout();
+            setProcessing(false);
         } catch (err) {
             setError(err.message ? err.message : 'An unknown error occured');
             setProcessing(false);

@@ -1,22 +1,26 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (req, res, callback) => {
-    try {
-        const amount = 1000
-
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount,
-            currency: "usd"
-        });
-
-        return {
-            statusCode: 200,
-            body: {req, res, callback}
-        }
-    } catch (err) {
-        return { statusCode: 500, body: err.toString() };
-    }
+    return { req, res, callback }
 }
+
+// exports.handler = async (req, res, callback) => {
+//     try {
+//         const amount = 1000
+
+//         const paymentIntent = await stripe.paymentIntents.create({
+//             amount,
+//             currency: "usd"
+//         });
+
+//         return {
+//             statusCode: 200,
+//             body: paymentIntent.client_secret
+//         }
+//     } catch (err) {
+//         return { statusCode: 500, body: err.toString() };
+//     }
+// }
 
 // exports.handler = async (req, res) => {
 //     if (req.method === 'POST') {
