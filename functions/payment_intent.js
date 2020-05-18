@@ -1,5 +1,11 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+const statusCode = 200;
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type"
+};
+
 exports.handler = async (event, context, callback) => {
     if (event.httpMethod === 'POST') {
         const data = JSON.parse(event.body);
@@ -13,7 +19,7 @@ exports.handler = async (event, context, callback) => {
             });
 
             return {
-                statusCode: 200,
+                statusCode,
                 headers,
                 body: JSON.stringify(paymentIntent.client_secret)
             }
@@ -22,7 +28,7 @@ exports.handler = async (event, context, callback) => {
             return {
                 statusCode: 500,
                 headers,
-                body: JSON.stringify(err.message)
+                body: err.message.toString()
             }
         }
 
