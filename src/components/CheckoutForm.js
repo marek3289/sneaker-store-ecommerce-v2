@@ -51,6 +51,11 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
         setProcessing(true);
 
         try {
+            const { data: clientSecret } = await axios.post('/.netlify/functions/payment_intent', {
+                // amount: price
+                amount: 1000
+            });
+
             const { error, paymentMethod } = await stripe.createPaymentMethod({
                 type: 'card',
                 card: elements.getElement('cardNumber'),
@@ -63,18 +68,13 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
                 return;
             }
 
-            const { data: clientSecret } = await axios.post('/.netlify/functions/payment_intent', {
-                // amount: price
-                amount: 1000
-            })
-
             const { id } = paymentMethod;
             const confirmCardPayment = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: id
             })
 
             if (confirmCardPayment.error) {
-                setError(error.message ? error.message : 'An unknown error occured');
+                setError(error.message);
                 setProcessing(false);
                 return;
             }
