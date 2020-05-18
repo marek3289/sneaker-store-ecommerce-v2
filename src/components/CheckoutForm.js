@@ -9,9 +9,7 @@ import { BillingDetails, CardDetails } from '@components';
 import { mixins, Button } from '@styles';
 
 const StyledForm = styled.form`
-    ${mixins.flexColumn};
     ${mixins.fullSize};
-    justify-content: space-evenly;
     & > * { max-width: 400px; min-width: 300px; }
 `;
 
@@ -52,19 +50,19 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
         if (!stripe || !elements) return;
         setProcessing(true);
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
-            card: elements.getElement('cardNumber'),
-            billing_details: billingDetails
-        })
-
-        if (error) {
-            setError(error.message);
-            setProcessing(false);
-            return;
-        }
-
         try {
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
+                type: 'card',
+                card: elements.getElement('cardNumber'),
+                billing_details: billingDetails
+            })
+
+            if (error) {
+                setError(error.message);
+                setProcessing(false);
+                return;
+            }
+            
             const { data: clientSecret } = await axios.post('/.netlify/functions/payment_intent', {
                 amount: price
             })
