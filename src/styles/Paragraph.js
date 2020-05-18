@@ -15,6 +15,19 @@ const Paragraph = styled.p`
             font-size: ${({ theme }) => theme.fontSize.m };
 	    `
 	)}
+
+    ${({ red }) => (
+        red && css`
+            color: red;
+	    `
+	)}
+
+    ${({ err }) => (
+        err && css`
+            margin: -15px 0;
+            margin-bottom: 25px;
+	    `
+	)}
 `;
 
 export default Paragraph;

@@ -1,25 +1,39 @@
-import Stripe from "stripe";
-require("dotenv").config({
-    path: `.env.${process.env.NODE_ENV}`,
-  })
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+// exports.handler = async (req, res) => {
+//     try {
+//         const { amount } = req.body;
+
+//         const paymentIntent = await stripe.paymentIntents.create({
+//             amount,
+//             currency: "usd"
+//         });
+
+//         return {
+//             statusCode: 200,
+//             body: paymentIntent.client_secret
+//         }
+//     } catch (err) {
+//         return { statusCode: 500, body: err.toString() };
+//     }
+// }
 
 exports.handler = async (req, res) => {
-    try {
-        // const { amount } = req.body;
-        const amount = 1000;
+    if (req.method === 'POST') {
+        const { amount } = req.body;
 
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount,
-            currency: "usd"
-        });
+        try {
+            const paymentIntent = await stripe.paymentIntents.create({
+                amount,
+                currency: "usd"
+            });
 
-        return {
-            statusCode: 200,
-            body: paymentIntent.client_secret
+            res.status(200).json(paymentIntent)
+        } catch (err) {
+            res.status(500).json({ statusCode: 500, message: err.message })
         }
-    } catch (err) {
-        return { statusCode: 500, body: err.toString() };
+    } else {
+        res.setHeader('Allow', 'POST');
+        res.status(405).end('Method Not Allowed');
     }
 }

@@ -1,12 +1,18 @@
 const theme = {
     white: 'hsl(0, 0%, 100%)',
+    black: 'hsl(0, 0%, 0%)',
+
     gray100: 'hsl(0, 0%, 96%)',
     gray200: 'hsl(300, 4%, 92%)',
+    gray300: 'hsl(0, 0%, 83%)',
 
     red: 'hsl(0, 83%, 70%)',
     green100: 'hsl(148, 51%, 90%)',
     green200: 'hsl(148, 51%, 80%)',
     green300: 'hsl(148, 51%, 56%)',
+
+    border: '1px solid hsl(0, 0%, 83%)',
+    borderPadding: '8px 15px',
 
     light: 400,
     bold: 700,

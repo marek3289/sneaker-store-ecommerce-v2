@@ -28,6 +28,11 @@ const mixins = {
         height: calc(100vh - 75px);
     `,
 
+    fullSize: css`
+        width: 100%;
+        height: 100%;
+    `,
+
     transition: css`
         transition: 0.25s ease-in-out;
     `,

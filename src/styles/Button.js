@@ -10,6 +10,22 @@ const Button = styled.button`
         cursor: default;
     }
 
+    ${({ submit }) => (
+        submit && css`
+            font-size: ${({ theme }) => theme.fontSize.s };
+            background-color: ${({ theme }) => theme.green200 };
+            border: ${({ theme }) => theme.border };
+            border-color: ${({ theme }) => theme.green300 };
+            padding: ${({ theme }) => theme.borderPadding };
+            width: 100%;
+
+            :disabled {
+                cursor: default;
+                border-bottom-color: ${({ theme }) => theme.gray200 };
+            }
+        `
+    )}
+
     ${({ border }) => (
         border && css`
             border-bottom: 1px solid black;

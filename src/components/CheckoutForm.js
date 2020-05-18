@@ -1,40 +1,54 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useStripe, useElements } from '@stripe/react-stripe-js';
+import { useForm } from "react-hook-form";
 import axios from 'axios';
 
+import { BillingDetails, CardDetails } from '@components';
+import { mixins, Button } from '@styles';
+
 const StyledForm = styled.form`
-    width: 400px;
-    background-color: lightblue;
+    ${mixins.fullSize}
+    & > * { max-width: 400px; }
 `;
 
-const CheckoutForm = ({ onSuccessfulCheckout }) => {
-    const [isProcessing, setProcessing] = useState(null);
-    const [error, setError] = useState(null);
+const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
+    const { handleSubmit, register, errors } = useForm();
+
+    const [error, setError] = useState('');
+    const [isProcessing, setProcessing] = useState(false);
+    const [required, setRequired] = useState(false);
+    
+    const handleCardChange = (e) => {
+        if (e.empty) {
+            setRequired(true);
+        } else {
+            setRequired(false);
+        }
+        e.error ? setError(e.error.message) : setError('');
+    };
+
     const stripe = useStripe();
     const elements = useElements();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = async (values) => {
+        const { email, name, city, address, address2, state, zip } = values;
 
         const billingDetails = {
-            // name: e.target.name.value,
-            // email: e.target.email.value,
-            // adress: {
-            //     city: e.target.city.value,
-            //     line1: e.target.adress.value,
-            //     state: e.target.state.value,
-            //     postal_code: e.target.zip.value
-            // }
+            name,
+            email,
+            address: {
+                city,
+                line1: address,
+                line2: address2,
+                state,
+                postal_code: zip
+            }
         }
 
         if (!stripe || !elements) return;
-
         setProcessing(true);
-
-        const { data: clientSecret } = await axios.post('/.netlify/functions/payment_intent', {
-            amount: 100
-        })
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
@@ -45,39 +59,47 @@ const CheckoutForm = ({ onSuccessfulCheckout }) => {
         if (error) {
             setError(error.message);
             setProcessing(false);
-        } else {
-            setError(null);
+            return;
+        }
 
-            try {
-                const { id } = paymentMethod;
+        try {
+            const { data: clientSecret } = await axios.post('/.netlify/functions/payment_intent', {
+                amount: price
+            })
 
-                const confirmedCardPayment = await stripe.confirmCardPayment(clientSecret, {
-                    payment_method: id
-                })
+            const { id } = paymentMethod;
+            const confirmCardPayment = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: id
+            })
 
+            if (confirmCardPayment.error) {
+                setError(error.message ? error.message : 'An unknown error occured');
                 setProcessing(false);
-                onSuccessfulCheckout();
-            } catch (error) {
-                setError(error.message);
-                setProcessing(false);
+                return;
             }
+
+            onSuccessfulCheckout();
+            setProcessing(false);
+        } catch (err) {
+            setError(err.message ? err.message : 'An unknown error occured');
+            setProcessing(false);
         }
     }
     
     return (
-        <StyledForm onSubmit={handleSubmit}>
-            <div>billing elements</div>
-            <div>
-                <CardNumberElement /> 
-                <CardExpiryElement />
-                <CardCvcElement />
-            </div>
-            <button type='submit' disabled={!stripe || isProcessing}>
-                {isProcessing ? 'Processing...' : 'Pay'}
-            </button>
-            {error && <p>{error}</p>}
+        <StyledForm onSubmit={handleSubmit(onSubmit)} onInvalid={(e) => e.preventDefault()}>
+            <BillingDetails register={register} errors={errors} />
+            <CardDetails error={error} required={required} handleCardChange={handleCardChange} />
+            <Button submit type='submit' disabled={!stripe || isProcessing}>
+                {isProcessing ? 'Processing...' : `Pay ${price}`}
+            </Button>
         </StyledForm>
     )
 };
+
+CheckoutForm.propTypes = {
+    price: PropTypes.number.isRequired,
+    onSuccessfulCheckout: PropTypes.func.isRequired
+}
 
 export default CheckoutForm;
