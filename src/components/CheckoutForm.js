@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useStripe, useElements } from '@stripe/react-stripe-js';
+import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
@@ -62,9 +62,10 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
                 setProcessing(false);
                 return;
             }
-            
+
             const { data: clientSecret } = await axios.post('/.netlify/functions/payment_intent', {
-                amount: price
+                // amount: price
+                amount: 1000
             })
 
             const { id } = paymentMethod;
@@ -89,7 +90,14 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
     return (
         <StyledForm onSubmit={handleSubmit(onSubmit)} onInvalid={(e) => e.preventDefault()}>
             <BillingDetails register={register} errors={errors} />
-            <CardDetails error={error} required={required} handleCardChange={handleCardChange} />
+            <CardDetails 
+                error={error} 
+                required={required} 
+                handleCardChange={handleCardChange}
+                CardNumberElement={CardNumberElement}
+                CardExpiryElement={CardExpiryElement}
+                CardCvcElement={CardCvcElement}
+            />
             <Button submit type='submit' disabled={!stripe || isProcessing}>
                 {isProcessing ? 'Processing...' : `Pay ${price} USD`}
             </Button>
