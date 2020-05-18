@@ -1,8 +1,40 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-exports.handler = async (req, res, callback) => {
-    return { req, res, callback }
+exports.handler = async (event, context, callback) => {
+    if (event.httpMethod === 'POST') {
+        const data = JSON.parse(event.body);
+
+        try {
+            const { amount } = data;
+
+            const paymentIntent = await stripe.paymentIntents.create({
+                amount,
+                currency: 'usd'
+            });
+
+            return {
+                statusCode: 200,
+                headers,
+                body: JSON.stringify(paymentIntent.client_secret)
+            }
+
+        } catch (err) {
+            return {
+                statusCode: 500,
+                headers,
+                body: JSON.stringify(err.message)
+            }
+        }
+
+    } else {
+        return {
+            statusCode: 405,
+            headers,
+            body: 'Method Not Allowed'
+          };
+    }
 }
+
 
 // exports.handler = async (req, res, callback) => {
 //     try {
