@@ -1,15 +1,17 @@
-import Stripe from "stripe";
+// import Stripe from "stripe";
 
-require("dotenv").config({
-    path: `.env.${process.env.NODE_ENV}`,
-})
+// require("dotenv").config({
+//     path: `.env.${process.env.NODE_ENV}`,
+// })
 
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-exports.handler = async (req, res) => {
+exports.handler = async (req, res, callback) => {
     try {
-        // const { amount } = req.body;
+        console.log('req', req)
+        console.log('res', res)
+        console.log('callback', callback)
 
         const amount = 1000
 
