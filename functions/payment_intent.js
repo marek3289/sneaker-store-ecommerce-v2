@@ -1,18 +1,8 @@
-// import Stripe from "stripe";
-
-// require("dotenv").config({
-//     path: `.env.${process.env.NODE_ENV}`,
-// })
-
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (req, res, callback) => {
+    console.log(req, res, callback)
     try {
-        console.log('req', req)
-        console.log('res', res)
-        console.log('callback', callback)
-
         const amount = 1000
 
         const paymentIntent = await stripe.paymentIntents.create({
