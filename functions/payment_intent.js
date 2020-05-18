@@ -9,7 +9,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (req, res) => {
     try {
-        const { amount } = req.body;
+        // const { amount } = req.body;
+
+        const amount = 1000
 
         const paymentIntent = await stripe.paymentIntents.create({
             amount,
