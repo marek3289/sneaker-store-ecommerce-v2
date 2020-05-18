@@ -9,7 +9,9 @@ import { BillingDetails, CardDetails } from '@components';
 import { mixins, Button } from '@styles';
 
 const StyledForm = styled.form`
-    ${mixins.fullSize}
+    ${mixins.flexColumn};
+    ${mixins.fullSize};
+    justify-content: space-evenly;
     & > * { max-width: 400px; }
 `;
 
@@ -91,7 +93,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
             <BillingDetails register={register} errors={errors} />
             <CardDetails error={error} required={required} handleCardChange={handleCardChange} />
             <Button submit type='submit' disabled={!stripe || isProcessing}>
-                {isProcessing ? 'Processing...' : `Pay ${price}`}
+                {isProcessing ? 'Processing...' : `Pay ${price} USD`}
             </Button>
         </StyledForm>
     )
