@@ -3,6 +3,9 @@ module.exports = {
     shortTitle: 'SneakerStore',
     description: 'E-Commerce sneakers app created using Gatsby and Stripe',
     author: 'marek3289',
+    
+    currency: 'USD',
+
     routes: {
         home: '/',
         success: '/success',

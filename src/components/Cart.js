@@ -84,7 +84,7 @@ const Cart = ({ isOpen, setOpen }) => {
                         <Paragraph>cart total:</Paragraph>
                         <Paragraph big bold>{totalPrice()}</Paragraph>
                     </StyledPriceWrapper>
-                    <Button border disabled={!cartCount} onClick={handleCheckout}>checkout</Button>
+                    <Button border disabled={cartCount === 0} onClick={handleCheckout}>checkout</Button>
                 </StyledCheckout>
             </StyledGrid>
         </StyledWrapper>

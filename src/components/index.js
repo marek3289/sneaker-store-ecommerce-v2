@@ -8,6 +8,7 @@ export { default as CheckoutForm } from './CheckoutForm';
 export { default as Label } from './Label';
 export { default as BillingDetails } from './BillingDetails';
 export { default as CardDetails } from './CardDetails';
+export { default as CartSummary } from './CartSummary';
 export { default as CartButton } from './CartButton';
 export { default as SocialLinks } from './SocialLinks';
 export { default as ProductInfo } from './ProductInfo';

@@ -12,7 +12,7 @@ const theme = {
     green300: 'hsl(148, 51%, 56%)',
 
     border: '1px solid hsl(0, 0%, 83%)',
-    borderPadding: '8px 15px',
+    borderPadding: '10px 15px',
 
     light: 400,
     bold: 700,

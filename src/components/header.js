@@ -23,7 +23,7 @@ const Logo = styled(Link)`
 
 const Header = () => {
     const [isOpen, setOpen] = useState(false);
-    
+
     return(
         <StyledWrapper>
             <Logo to={config.routes.home}>Sneaker Store</Logo>

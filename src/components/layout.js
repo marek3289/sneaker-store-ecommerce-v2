@@ -16,29 +16,19 @@ const StyledContent = styled.div`
 
 const stripePromise = loadStripe('pk_test_xtKiUnBl1NpBMuVpmZ6AlxD100sbAyw1yA');
 
-const MainLayout = ({ children, location }) => {
-    const cartProps = {
-        stripe: stripePromise,
-        successUrl: `${location.origin}${config.routes.success}`,
-        cancelUrl: `${location.origin}`,
-        currency: "USD",
-        allowedCountries: ['US', 'GB', 'CA'],
-        billingAddressCollection: true
-    }
-
-    return (
-        <CartProvider {...cartProps}>
-            <Elements stripe={stripePromise}>
-                <GlobalStyle />
-                <ThemeProvider theme={theme}>
-                    <StyledContent>
-                        <Header />
-                        {children}    
-                    </StyledContent>   
-                </ThemeProvider>
-            </Elements>
+const MainLayout = ({ children }) => (
+    <Elements stripe={stripePromise}>
+        <CartProvider mode='checkout-session' stripe={stripePromise} currency={config.currency}>
+            <GlobalStyle />
+            <ThemeProvider theme={theme}>
+                <StyledContent>
+                    <Header />
+                    {children}    
+                </StyledContent>   
+            </ThemeProvider>
         </CartProvider>
-    )
-};
+    </Elements>
+);
+
 
 export default MainLayout;

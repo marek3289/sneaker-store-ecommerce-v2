@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { mixins } from '@styles';
-
 const Input = styled.input`
   font-size: ${({ theme }) => theme.fontSize.m };
   font-weight: ${({ theme }) => theme.light };

@@ -16,7 +16,7 @@ const StyledLinkWrapper = styled(TransitionLink)`
     padding: 25px;
     border: 1px solid ${({ theme }) => theme.white };
     ${mixins.fullHeight};
-    ${media.desktop`height: 100%;`};
+    ${media.desktop`height: 330px;`};
 `
 
 const StyledFigure = styled.figure`
