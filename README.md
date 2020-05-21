@@ -15,13 +15,17 @@ This is my second approach to create E-Commerce project with Stripe. First versi
 
 ## Live Versions 📍
 
-<p>First Version - Client Side Only:</p>
-<a href="https://sneaker-store-ecommerce.netlify.app">https://sneaker-store-ecommerce.netlify.app</a>
+<div>
+  <p>First Version - Client Side Only:</p>
+  <a href="https://sneaker-store-ecommerce.netlify.app">https://sneaker-store-ecommerce.netlify.app</a>
+</div>
 
-<br>
+<br/>
 
-<p>Second Version - Cliend and Server Side, using Stripe Elements:</p>
-<a href="https://sneaker-store-ecommerce-v2.netlify.app">https://sneaker-store-ecommerce-v2.netlify.app</a>
+<div>
+  <p>Second Version - Cliend and Server Side, using Stripe Elements:</p>
+  <a href="https://sneaker-store-ecommerce-v2.netlify.app">https://sneaker-store-ecommerce-v2.netlify.app</a>
+</div>
 
 ## 🚀 Quick start
 
